@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  get 'posts', to: 'posts#index'
-  #getでトップページを表示・パスのURLは〜/posts
-  #postsコントローラーにいき、indexという名前のアクション
-
-  get 'posts/new', to: 'posts#new'
+  root to: 'posts#index'
   post 'posts', to: 'posts#create'
 
 end
