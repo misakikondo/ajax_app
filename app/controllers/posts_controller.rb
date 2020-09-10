@@ -6,8 +6,11 @@ class PostsController < ApplicationController
  end
 
  def create
-  Post.create(content:params[:content])
-  redirect_to action: :index
+  post = Post.create(content: params[:content], checked: false)
+  # postを作成保存するためにcreateアクション
+  # 中身はフォームからきらパラムスで未読状態で
+  render json:{ post: post }
+  # json形式でpostをmemo.jsに返す
  end
 
  def checked
@@ -27,7 +30,7 @@ class PostsController < ApplicationController
   item = Post.find(params[:id])
   # 更新したレコードを取得し直す
   render json: { post: item }
-  # JSON形式のデータとしてchecked.jsに返す
+  # JSON形式のデータとしてitemをchecked.jsに返す
  end
 
 end
