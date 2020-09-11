@@ -8,13 +8,14 @@ class PostsController < ApplicationController
  def create
   post = Post.create(content: params[:content], checked: false)
   # postを作成保存するためにcreateアクション
-  # 中身はフォームからきらパラムスで未読状態で
+  # 中身はフォームからきたパラムスで未読状態で
   render json:{ post: post }
-  # json形式でpostをmemo.jsに返す
+  #ここで定義したpostは、変数postという名前でjsonで使えるよ
+  #JSONでデータを返却するにはコントローラーの記述を工夫する必要があります。
  end
 
  def checked
-  # クリックした時のアクション
+  # クリックした時のアクションchecked.js
   post = Post.find(params[:id])
   # routeで設定したURLパラメーターから、
   # 既読したメモのidをレコードから取り出した
@@ -28,8 +29,9 @@ class PostsController < ApplicationController
     # クリックした時既読にする
   end
   item = Post.find(params[:id])
-  # 更新したレコードを取得し直す
-  render json: { post: item }
+  # 既読か未読かを更新したレコードを取得し直す
+  render json:{ post: item }
+  # ここで定義したitemは、変数postという名前でjsonで使えるよ
   # JSON形式のデータとしてitemをchecked.jsに返す
  end
 

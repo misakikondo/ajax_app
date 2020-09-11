@@ -16,9 +16,9 @@ function check() {
       // post.getAttribute("data-id")はつまり<%= post.id %>のこと
       // このidは後にサーバーでパラメーターとして送られる
       const XHR = new XMLHttpRequest();
-      //XMLHttpRequestに情報を格納してコントローラへ送りたいのでオブジェクト生成する
+      //XMLHttpRequestに情報を格納して送りたいのでオブジェクト生成する
       XHR.open("GET", `/posts/${postId}`, true);
-      //どんなリクエストをするのかopenメソッドでコントローラーへ伝える
+      //どんなリクエストをするのかopenメソッド
       XHR.responseType = "json";
       //どんなレスポンス形式で返して欲しいかresponseTypeメソッドで指定
       //リクエストと一緒に送る
