@@ -6,12 +6,16 @@ class PostsController < ApplicationController
  end
 
  def create
-  Post.create(content:params[:content])
-  redirect_to action: :index
+  post = Post.create(content: params[:content], checked: false)
+  # postを作成保存するためにcreateアクション
+  # 中身はフォームからきたパラムスで未読状態で
+  render json:{ post: post }
+  #ここで定義したpostは、変数postという名前でjsonで使えるよ
+  #JSONでデータを返却するにはコントローラーの記述を工夫する必要があります。
  end
 
  def checked
-  # クリックした時のアクション
+  # クリックした時のアクションchecked.js
   post = Post.find(params[:id])
   # routeで設定したURLパラメーターから、
   # 既読したメモのidをレコードから取り出した
@@ -25,9 +29,10 @@ class PostsController < ApplicationController
     # クリックした時既読にする
   end
   item = Post.find(params[:id])
-  # 更新したレコードを取得し直す
-  render json: { post: item }
-  # JSON形式のデータとしてchecked.jsに返す
+  # 既読か未読かを更新したレコードを取得し直す
+  render json:{ post: item }
+  # ここで定義したitemは、変数postという名前でjsonで使えるよ
+  # JSON形式のデータとしてitemをchecked.jsに返す
  end
 
 end
